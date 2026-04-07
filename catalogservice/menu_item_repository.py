@@ -1,3 +1,10 @@
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["food_ordering_system"]
+collection = db["menu_items"]
+
+
 # Interact with Mongo here, probably going to be a class with static methods
 class MenuItemRepository:
     @staticmethod
