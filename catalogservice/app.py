@@ -1,51 +1,65 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
+from menu_item_repository import MenuItemRepository
 
 app = Flask(__name__)
+app.json.sort_keys = False
 
 
 @app.get("/api/menu-items/test")
 def test():
-    return jsonify({"message": "Menu Item Service is up and running!"})
+    return jsonify({"message": "Catalog Service is up and running!"})
 
 
 @app.get("/api/menu-items")
 def get_menu_items():
-    # Placeholder for fetching menu items from the database
-    menu_items = [
-        {
-            "id": 1,
-            "name": "Pizza",
-            "description": "Delicious cheese pizza",
-            "price": 9.99,
-        },
-        {"id": 2, "name": "Burger", "description": "Juicy beef burger", "price": 7.99},
-    ]
-    return jsonify(menu_items)
+    return jsonify(MenuItemRepository.get_all_menu_items())
+
+
+@app.get("/api/menu-items/<menu_item_id>")
+def get_menu_item(menu_item_id):
+    menu_item = MenuItemRepository.get_menu_item_by_id(menu_item_id)
+    return jsonify(menu_item)
 
 
 @app.post("/api/menu-items")
 def add_menu_item():
-    # Placeholder for adding a new menu item to the database
-    return jsonify({"message": "Menu item added successfully!"})
+    new_menu_item_data = request.get_json()
+
+    if not new_menu_item_data:
+        return jsonify({"error": "Invalid input data"}), 400
+
+    new_menu_item = MenuItemRepository.add_menu_item(new_menu_item_data)
+    return (jsonify({"message": "Menu item added successfully!", "menu_item": new_menu_item}), 201)
 
 
-@app.put("/api/menu-items/<int:menu_item_guid>")
+@app.put("/api/menu-items/<menu_item_guid>")
 def update_menu_item(menu_item_guid):
-    # Placeholder for updating an existing menu item in the database
-    return jsonify(
-        {"message": f"Menu item with ID {menu_item_guid} updated successfully!"}
-    )
+    updated_menu_item_data = request.get_json()
+
+    if not updated_menu_item_data:
+        return jsonify({"error": "Invalid input data"}), 400
+
+    updated_menu_item = MenuItemRepository.update_menu_item(menu_item_guid, updated_menu_item_data)
+    if not updated_menu_item:
+        return jsonify({"error": "Menu item not found"}), 404
+
+    return jsonify({"message": f"Menu item with ID {updated_menu_item} updated successfully!"})
 
 
-@app.delete("/api/menu-items/<int:menu_item_guid>")
+@app.delete("/api/menu-items/<menu_item_guid>")
 def delete_menu_item(menu_item_guid):
-    # Placeholder for deleting a menu item from the database
+    deleted_menu_item = MenuItemRepository.delete_menu_item(menu_item_guid)
+    
+    if not deleted_menu_item:
+        return jsonify({"error": "Menu item not found"}), 404
+
     return jsonify(
-        {"message": f"Menu item with ID {menu_item_guid} deleted successfully!"}
+        {"message": f"Menu item with ID {deleted_menu_item} deleted successfully!"}
     )
 
 
-@app.get("/api/menu-items/search/<str:search_text>")
+@app.get("/api/menu-items/search/<search_text>")
 def search_menu_items(search_text):
-    # Placeholder for searching menu items by title or description in the database
-    return jsonify({"message": f"Search results for '{search_text}'!"})
+    search_results = MenuItemRepository.search_menu_items(search_text)
+
+    return jsonify(search_results), 200
