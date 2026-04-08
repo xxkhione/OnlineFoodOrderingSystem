@@ -18,7 +18,7 @@ def get_menu_items():
 @app.get("/api/menu-items/<menu_item_id>")
 def get_menu_item(menu_item_id):
     menu_item = MenuItemRepository.get_menu_item_by_id(menu_item_id)
-    return jsonify(menu_item)
+    return jsonify(menu_item if menu_item else {"error": "Menu item not found"}), (200 if menu_item else 404)
 
 
 @app.post("/api/menu-items")
