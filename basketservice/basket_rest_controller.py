@@ -12,7 +12,7 @@ load_dotenv()
 
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
-MENU_ITEM_SERVICE_URL = os.getenv("MENU_ITEM_SERVICE_URL", "http://localhost:5000/api/menu-items")
+MENU_ITEM_SERVICE_URL = os.getenv("MENU_ITEM_SERVICE_URL", "http://catalog_service:5000/api/menu-items")
 
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0, decode_responses=True)
