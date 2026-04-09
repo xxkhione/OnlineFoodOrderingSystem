@@ -3,11 +3,11 @@ services:
     build: .
     container_name: SEN300BasketService
     ports:
-      - "5001:5000"
+      - "8001:8000"
     environment:
-      REDIS_HOST=SEN300BasketServiceDBRedis
-      REDIS_PORT=6379
-      BOOK_SERVICE_URL=http://SEN300CatalogService:5000/api/menu-items
+      REDIS_HOST: SEN300BasketServiceDBRedis
+      REDIS_PORT: 6379
+      BOOK_SERVICE_URL: http://SEN300CatalogService:5000/api/menu-items
     depends_on:
       redis:
         condition: service_healthy

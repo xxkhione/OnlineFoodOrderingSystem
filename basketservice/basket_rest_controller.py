@@ -43,6 +43,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/api/basket/test")
+def test_basket():
+    return {"message": "Basket Service is up and running!"}
+
 
 @app.get("/api/basket/{user_id}", response_model=list[MenuItem])
 def get_basket(user_id: str):
