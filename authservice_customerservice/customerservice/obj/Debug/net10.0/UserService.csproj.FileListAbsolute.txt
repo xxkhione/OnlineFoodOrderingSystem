@@ -1,0 +1,9 @@
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.csproj.AssemblyReference.cache
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.AssemblyInfoInputs.cache
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.AssemblyInfo.cs
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.csproj.CoreCompileInputs.cache
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.MvcApplicationPartsAssemblyInfo.cs
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.MvcApplicationPartsAssemblyInfo.cache
+C:\Courses\Q11\SEN300\online-food-ordering-system\authservice_customerservice\customerservice\obj\Debug\net10.0\UserService.sourcelink.json
