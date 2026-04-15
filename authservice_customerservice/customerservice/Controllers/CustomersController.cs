@@ -10,6 +10,12 @@ public class CustomersController(
     CustomerServiceDbContext db,
     IMapper mapper) : ControllerBase
 {
+    [HttpGet("test")]
+    public IActionResult Test()
+    {
+        return Ok(new { Success = true, Message = "CustomerService is up and running!" });
+    }
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
