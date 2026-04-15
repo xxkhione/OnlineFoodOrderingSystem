@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/TestResults/
+**/publish/
+**/*.user
+**/*.suo
+**/*.swp
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+.git
+.gitignore
+README.md
