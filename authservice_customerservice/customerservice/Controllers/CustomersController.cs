@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -113,6 +114,7 @@ public class CustomersController(
     }
 
     [HttpPut("{customerGuid:guid}")]
+    [Authorize]
     public async Task<IActionResult> Update(Guid customerGuid, [FromBody] CustomerDTO customerDTO)
     {
         try
