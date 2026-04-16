@@ -13,11 +13,11 @@ public class AuthController(
     IHttpClientFactory httpClientFactory,
     IConfiguration config) : ControllerBase
 {
-    [HttpGet("test1")]
+    [HttpGet("test")]
     public IActionResult Test1() => Ok("Hello from AuthController");
 
-    [HttpPost("createtoken/method1")]
-    public async Task<IActionResult> CreateTokenMethod1([FromBody] CustomerDTO customerDto)
+    [HttpPost("createtoken")]
+    public async Task<IActionResult> CreateToken([FromBody] CustomerDTO customerDto)
     {
         var customerServiceUrl = config["CustomerServiceUrl"]
             ?? throw new InvalidOperationException("CustomerServiceUrl is not configured.");
@@ -70,17 +70,6 @@ public class AuthController(
 
         logger.LogInformation("JWT issued for {Email}.", customerDto.Email);
         return Ok(tokenString);
-    }
-
-    // Test endpoint: manually validates a Bearer token without relying on [Authorize].
-    // Useful for teaching how JWT validation works under the hood.
-    [HttpGet("testbasicauth")]
-    public IActionResult TestBasicAuth()
-    {
-        if (IsRequestAuthenticated(out _))
-            return Ok("YES - Authenticated!");
-
-        return Unauthorized("NO - NOT Authenticated");
     }
 
     private bool IsRequestAuthenticated(out ClaimsPrincipal? principal)
