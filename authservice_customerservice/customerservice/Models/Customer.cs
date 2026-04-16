@@ -10,8 +10,6 @@ public class Customer
     [Required]
     public String Email { get; set; }
 
-    // EDUCATIONAL ONLY: plaintext password stored alongside the hash so students
-    // can compare them directly in the DB. Never do this in production.
     [Required]
     public String Password { get; set; }
 

@@ -113,6 +113,7 @@ public class CustomersController(
     }
 
     [HttpPut("{customerGuid:guid}")]
+    [Authorize]
     public async Task<IActionResult> Update(Guid customerGuid, [FromBody] CustomerDTO customerDTO)
     {
         try
