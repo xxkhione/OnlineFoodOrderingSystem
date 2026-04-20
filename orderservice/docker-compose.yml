@@ -1,0 +1,42 @@
+services:
+  order_service:
+    build: .
+    container_name: SEN300OrderService
+    ports:
+      - "8004:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=orders;Username=postgres_user;Password=postgres!
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+
+  postgres:
+    image: postgres:16
+    container_name: SEN300OrderServiceDBPostgres
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres!
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres_user -d orders"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sen300_network
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+  sen300_network:
+    external: true
