@@ -1,9 +1,9 @@
 services:
   order_service:
-    build: ./orderservice
+    build: .
     container_name: SEN300OrderService
     ports:
-      - "8003:8080"
+      - "8004:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=orders;Username=postgres_user;Password=postgres!
