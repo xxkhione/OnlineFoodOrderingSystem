@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /orderservice
 
-COPY . .
+COPY . ./
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish
 
@@ -10,4 +10,4 @@ WORKDIR /app
 
 COPY --from=build /app/publish/ .
 
-ENTRYPOINT ["dotnet", "OrderService.dll"]
+ENTRYPOINT ["dotnet", "orderservice.dll"]
