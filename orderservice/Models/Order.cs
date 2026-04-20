@@ -6,7 +6,7 @@ public class Order
     public Guid OrderGuid { get; set; }
 
     [Required]
-    public Guid UserGuid { get; set; } 
+    public Guid CustomerGuid { get; set; } 
 
     [Required]
     public Guid BasketGuid { get; set; }
