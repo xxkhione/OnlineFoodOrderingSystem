@@ -6,5 +6,5 @@ public class Basket
     public Guid BasketGuid { get; set; }
 
     [Required]
-    public List<FoodItemDTO>? FoodItems { get; set; }
+    public List<MenuItemDTO>? MenuItems { get; set; }
 }

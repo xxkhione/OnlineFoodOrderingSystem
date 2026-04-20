@@ -5,6 +5,6 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<CustomerDTO, Customer>();        
         CreateMap<OrderDTO, Order>();
-        CreateMap<FoodItemDTO, FoodItem>();
+        CreateMap<MenuItemDTO, MenuItem>();
     }
 }

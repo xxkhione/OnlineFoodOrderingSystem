@@ -1,6 +1,6 @@
 public class OrderNotification
 {
-    public Guid UserGuid { get; set; }
+    public Guid CustomerGuid { get; set; }
     public Guid OrderGuid { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

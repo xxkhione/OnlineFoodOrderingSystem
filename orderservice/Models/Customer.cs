@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-public class User
+public class Customer
 {
     [Key]
     public Guid UserGuid { get; set; }
