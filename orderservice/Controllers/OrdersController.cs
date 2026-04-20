@@ -74,7 +74,7 @@ public class OrdersController(
         }
     }
 
-    [HttpGet("user/{customerGuid:guid}")]
+    [HttpGet("customer/{customerGuid:guid}")]
     public async Task<IActionResult> GetByCustomerGuid(Guid customerGuid)
     {
         try
