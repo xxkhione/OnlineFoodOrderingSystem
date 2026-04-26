@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "FQX8ddROc9o=",
+  "dgSpecHash": "n9tAlrJh8rQ=",
   "success": true,
-  "projectFilePath": "C:\\Courses\\Q11\\SEN300\\online-food-ordering-system\\MessageService\\MessageService.csproj",
+  "projectFilePath": "C:\\Courses\\Q11\\SEN300\\online-food-ordering-system\\messageservice\\MessageService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\dsargent\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\10.0.7\\microsoft.aspnetcore.jsonpatch.10.0.7.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\10.0.7\\microsoft.aspnetcore.mvc.newtonsoftjson.10.0.7.nupkg.sha512",
     "C:\\Users\\dsargent\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.5\\microsoft.aspnetcore.openapi.10.0.5.nupkg.sha512",
-    "C:\\Users\\dsargent\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+    "C:\\Users\\dsargent\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\rabbitmq.client\\7.2.1\\rabbitmq.client.7.2.1.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\scalar.aspnetcore\\2.14.4\\scalar.aspnetcore.2.14.4.nupkg.sha512"
   ],
   "logs": []
 }
