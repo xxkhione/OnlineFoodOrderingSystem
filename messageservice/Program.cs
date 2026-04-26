@@ -3,8 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 // eureka
-using Steeltoe.Discovery.Client;
-using Steeltoe.Discovery.Eureka;
+// using Steeltoe.Discovery.Client;
+// using Steeltoe.Discovery.Eureka;
 
 using Scalar.AspNetCore;
 

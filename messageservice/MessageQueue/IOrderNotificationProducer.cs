@@ -1,4 +1,4 @@
 public interface IOrderNotificationProducer
 {
-    void SendMessage<T>(T message);
+    Task SendMessage<T>(T message);
 }

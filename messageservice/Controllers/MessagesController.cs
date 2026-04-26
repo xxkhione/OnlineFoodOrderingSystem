@@ -14,7 +14,7 @@ public class MessagesController(
     {
         var notification = new OrderNotification
         {
-            UserGuid = Guid.NewGuid(),
+            CustomerGuid = Guid.NewGuid(),
             OrderGuid = Guid.NewGuid(),
             Name = "Test User",
             Email = "test@example.com",
@@ -22,8 +22,8 @@ public class MessagesController(
         };
 
         msgQueue.SendMessage(notification);
-        logger.LogInformation("Test message sent to queue. UserGuid: {UserGuid}, OrderGuid: {OrderGuid}.",
-            notification.UserGuid, notification.OrderGuid);
+        logger.LogInformation("Test message sent to queue. CustomerGuid: {CustomerGuid}, OrderGuid: {OrderGuid}.",
+            notification.CustomerGuid, notification.OrderGuid);
 
         return Ok("Test message sent to queue.");
     }

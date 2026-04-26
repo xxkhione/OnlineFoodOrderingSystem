@@ -2,28 +2,59 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
 
-public class OrderNotificationProducer : IOrderNotificationProducer, IDisposable
+public class OrderNotificationProducer : IOrderNotificationProducer, IAsyncDisposable
 {
-    private readonly IConnection _connection;
+    private readonly Task<IConnection> _connectionTask;
 
     public OrderNotificationProducer(IConfiguration config)
     {
-        _connection = new ConnectionFactory
+        var factory = new ConnectionFactory
         {
-            HostName = config["RabbitMQ:host"],
-            Port = int.Parse(config["RabbitMQ:port"] ?? "5672"),
-        }.CreateConnection();
+            HostName = config["RabbitMQ:host"] ?? "localhost",
+            Port = int.TryParse(config["RabbitMQ:port"], out var port) ? port : 5672,
+            VirtualHost = "/",
+            AutomaticRecoveryEnabled = true
+        };
+
+        _connectionTask = factory.CreateConnectionAsync();
     }
 
-    public void SendMessage<T>(T message)
+    public async Task SendMessage<T>(T message)
     {
-        using var channel = _connection.CreateModel();
-        channel.QueueDeclare(queue: "notifyQueue", durable: true, exclusive: false, autoDelete: false, arguments: null);
+        var connection = await _connectionTask;
+        await using var channel = await connection.CreateChannelAsync();
+
+        await channel.QueueDeclareAsync(
+            queue: "notifyQueue",
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null);
 
         var json = JsonConvert.SerializeObject(message);
         var body = Encoding.UTF8.GetBytes(json);
-        channel.BasicPublish(exchange: "", routingKey: "notifyQueue", basicProperties: null, body: body);
+
+        var props = new BasicProperties
+        {
+            ContentType = "application/json",
+            DeliveryMode = DeliveryModes.Persistent
+        };
+
+        await channel.BasicPublishAsync(
+            exchange: "",
+            routingKey: "notifyQueue",
+            mandatory: false,
+            basicProperties: props,
+            body: body);
     }
 
-    public void Dispose() => _connection?.Dispose();
+    public async ValueTask DisposeAsync()
+    {
+        if (_connectionTask.IsCompletedSuccessfully)
+        {
+            var connection = await _connectionTask;
+            await connection.CloseAsync();
+            await connection.DisposeAsync();
+        }
+    }
 }
