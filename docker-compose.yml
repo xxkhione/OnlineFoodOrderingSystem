@@ -1,0 +1,184 @@
+services:
+  catalog_service:
+    build: ./catalogservice
+    container_name: SEN300CatalogService
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://catalog_mongo:27017/
+    depends_on:
+      catalog_mongo:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+  basket_service:
+    build: ./basketservice
+    container_name: SEN300BasketService
+    ports:
+      - "8001:8000"
+    environment:
+      REDIS_HOST: SEN300BasketServiceDBRedis
+      REDIS_PORT: 6379
+      BOOK_SERVICE_URL: http://SEN300CatalogService:5000/api/menu-items
+    depends_on:
+      basket_redis:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+  customer_service:
+    build: ./authservice_customerservice/customerservice
+    container_name: SEN300CustomerService
+    ports:
+      - "8002:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=customer_postgres;Port=5432;Database=customers;Username=postgres_user;Password=postgres!
+    depends_on:
+      customer_postgres:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+  auth_service:
+    build: ./authservice_customerservice/authservice
+    container_name: SEN300AuthService
+    ports:
+      - "8003:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      - customer_service
+    networks:
+      - sen300_network
+    restart: always
+  order_service:
+    build: ./orderservice
+    container_name: SEN300OrderService
+    ports:
+      - "8004:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=order_postgres;Port=5432;Database=orders;Username=postgres_user;Password=postgres!
+    depends_on:
+      order_postgres:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+  message_service:
+    build: ./messageservice
+    container_name: SEN300MessageService
+    ports:
+      - "8005:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+
+  catalog_mongo:
+    image: mongo:latest
+    container_name: SEN300CatalogServiceDBMongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - sen300_network
+    restart: always
+  basket_redis:
+    image: redis:latest
+    container_name: SEN300BasketServiceDBRedis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - sen300_network
+    restart: always
+  customer_postgres:
+    image: postgres:16
+    container_name: SEN300CustomerServiceDBPostgres
+    environment:
+      POSTGRES_DB: customers
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres!
+    ports:
+      - "5432:5432"
+    volumes:
+      - cpostgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres_user -d customers"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sen300_network
+    restart: always
+  order_postgres:
+    image: postgres:16
+    container_name: SEN300OrderServiceDBPostgres
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres!
+    ports:
+      - "5433:5432"
+    volumes:
+      - opostgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres_user -d orders"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sen300_network
+    restart: always
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: SEN300MessageServiceRabbitMQ
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: appuser
+      RABBITMQ_DEFAULT_PASS: apppass
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - sen300_network
+    restart: always
+
+volumes:
+  mongo_data:
+  redis_data:
+  cpostgres_data:
+  opostgres_data:
+  rabbitmq_data:
+
+networks:
+  sen300_network:
+    external: true
