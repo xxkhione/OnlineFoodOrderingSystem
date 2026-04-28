@@ -6,12 +6,14 @@ public class OrderNotificationProducer : IOrderNotificationProducer, IAsyncDispo
 {
     private readonly Task<IConnection> _connectionTask;
 
-    public OrderNotificationProducer(IConfiguration config)
+    public OrderNotificationProducer(IConfiguration _config)
     {
         var factory = new ConnectionFactory
         {
-            HostName = config["RabbitMQ:host"] ?? "localhost",
-            Port = int.TryParse(config["RabbitMQ:port"], out var port) ? port : 5672,
+            HostName = _config["RabbitMQ:host"] ?? "localhost",
+            Port = int.TryParse(_config["RabbitMQ:port"], out var port) ? port : 5672,
+            UserName = _config["RabbitMQ:username"] ?? "appuser",
+            Password = _config["RabbitMQ:password"] ?? "apppass",
             VirtualHost = "/",
             AutomaticRecoveryEnabled = true
         };

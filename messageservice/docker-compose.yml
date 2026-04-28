@@ -1,0 +1,42 @@
+services:
+  message_service:
+    build: .
+    container_name: SEN300MessageService
+    ports:
+      - "8005:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - sen300_network
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: SEN300MessageServiceRabbitMQ
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: appuser
+      RABBITMQ_DEFAULT_PASS: apppass
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - sen300_network
+    restart: always
+
+volumes:
+  rabbitmq_data:
+
+networks:
+  sen300_network:
+    external: true

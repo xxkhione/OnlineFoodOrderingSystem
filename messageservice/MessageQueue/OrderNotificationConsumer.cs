@@ -26,6 +26,8 @@ public class OrderNotificationConsumer : BackgroundService
         {
             HostName = _config["RabbitMQ:host"] ?? "localhost",
             Port = int.TryParse(_config["RabbitMQ:port"], out var port) ? port : 5672,
+            UserName = _config["RabbitMQ:username"] ?? "appuser",
+            Password = _config["RabbitMQ:password"] ?? "apppass",
             VirtualHost = "/",
             AutomaticRecoveryEnabled = true
         };
