@@ -115,7 +115,7 @@ public class OrderNotificationConsumer : BackgroundService
 
         using var client = new SmtpClient("smtp.ethereal.email", 587)
         {
-            Credentials = new NetworkCredential("ashtyn35@ethereal.email", "uhvaTk4j4pBCTfWj49"),
+            Credentials = new NetworkCredential("barrett.grimes8@ethereal.email", "NXcHVQGEA6D5eJ6sn5"),
             EnableSsl = true
         };
 
