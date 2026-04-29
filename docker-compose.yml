@@ -94,8 +94,17 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: Host=order_postgres;Port=5432;Database=orders;Username=postgres_user;Password=postgres!
+      Spring__Application__Name: orderservice
+      Eureka__Client__ServiceUrl: http://SEN300EurekaServer:8761/eureka/
+      Eureka__Client__ShouldRegisterWithEureka: "true"
+      Eureka__Client__ShouldFetchRegistry: "true"
+      Eureka__Client__ValidateCertificates: "false"
+      Eureka__Instance__Hostname: order_service
+      Eureka__Instance__Port: 8080
     depends_on:
       order_postgres:
+        condition: service_healthy
+      eureka_server:
         condition: service_healthy
     networks:
       - sen300_network
@@ -107,8 +116,17 @@ services:
       - "8005:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      Spring__Application__Name: messageservice
+      Eureka__Client__ServiceUrl: http://SEN300EurekaServer:8761/eureka/
+      Eureka__Client__ShouldRegisterWithEureka: "true"
+      Eureka__Client__ShouldFetchRegistry: "true"
+      Eureka__Client__ValidateCertificates: "false"
+      Eureka__Instance__Hostname: message_service
+      Eureka__Instance__Port: 8080
     depends_on:
       rabbitmq:
+        condition: service_healthy
+      eureka_server:
         condition: service_healthy
     networks:
       - sen300_network
