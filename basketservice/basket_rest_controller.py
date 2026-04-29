@@ -2,11 +2,13 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from uuid import UUID, uuid4
+from contextlib import asynccontextmanager
 import os
 import redis
 import json
 import requests
 from menu_item import MenuItem
+from eureka_registration import register_with_eureka
 
 load_dotenv()
 
@@ -33,12 +35,23 @@ def fetch_menu_item_details(menu_item_guid: UUID):
         return None
 
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await register_with_eureka()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace for production!
+    allow_origins=["*"],  
     allow_methods=["*"],
     allow_headers=["*"],
 )

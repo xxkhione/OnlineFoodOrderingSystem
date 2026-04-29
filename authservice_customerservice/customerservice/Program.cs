@@ -2,15 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
-// eureka
-//using Steeltoe.Discovery.Client;
-//using Steeltoe.Discovery.Eureka;
-
+using Steeltoe.Discovery.Client;
+using Steeltoe.Discovery.Eureka;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHealthChecks();
 
 builder.Services.AddDbContext<CustomerServiceDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -39,12 +37,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddAuthorization();
-
-// Eureka / Steeltoe Service Discovery (currently disabled)
-// To re-enable: uncomment the line below and the UseDiscoveryClient() call at the bottom.
-// NOTE: Steeltoe 3.2.8 officially targets .NET 6/7/8. May still work on .NET 10 via .NET Standard
-// compatibility, but if you hit errors upgrade to Steeltoe 4.x: https://docs.steeltoe.io
-//builder.Services.AddDiscoveryClient(builder.Configuration);
+builder.Services.AddDiscoveryClient(builder.Configuration);
 
 var app = builder.Build();
 
@@ -65,9 +58,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHealthChecks("/health");
+app.UseDiscoveryClient();
 app.MapControllers();
-
-// Required if Eureka is enabled (Steeltoe 3.x only — obsolete/removed in Steeltoe 4.x)
-//app.UseDiscoveryClient();
 
 app.Run();

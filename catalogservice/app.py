@@ -1,8 +1,18 @@
+import asyncio
 from flask import Flask, request, jsonify
 from menu_item_repository import MenuItemRepository
+from eureka_registration import register_with_eureka
 
 app = Flask(__name__)
 app.json.sort_keys = False
+
+
+asyncio.run(register_with_eureka())
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}, 200
 
 
 @app.get("/api/menu-items/test")
