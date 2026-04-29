@@ -49,8 +49,17 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: Host=customer_postgres;Port=5432;Database=customers;Username=postgres_user;Password=postgres!
+      Spring__Application__Name: customerservice
+      Eureka__Client__ServiceUrl: http://SEN300EurekaServer:8761/eureka/
+      Eureka__Client__ShouldRegisterWithEureka: "true"
+      Eureka__Client__ShouldFetchRegistry: "true"
+      Eureka__Client__ValidateCertificates: "false"
+      Eureka__Instance__Hostname: customer_service
+      Eureka__Instance__Port: 8080
     depends_on:
       customer_postgres:
+        condition: service_healthy
+      eureka_server:
         condition: service_healthy
     networks:
       - sen300_network
@@ -62,8 +71,18 @@ services:
       - "8003:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      Spring__Application__Name: authservice
+      Eureka__Client__ServiceUrl: http://SEN300EurekaServer:8761/eureka/
+      Eureka__Client__ShouldRegisterWithEureka: "true"
+      Eureka__Client__ShouldFetchRegistry: "true"
+      Eureka__Client__ValidateCertificates: "false"
+      Eureka__Instance__Hostname: auth_service
+      Eureka__Instance__Port: 8080
     depends_on:
-      - customer_service
+      customer_service:
+        condition: service_started
+      eureka_server:
+        condition: service_healthy
     networks:
       - sen300_network
     restart: always
