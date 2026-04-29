@@ -296,6 +296,174 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Steeltoe.Common/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Abstractions": "3.2.8",
+          "System.Reflection.MetadataLoadContext": "4.6.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Common.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Common.Abstractions/3.2.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Common.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Common.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Common.Http/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common": "3.2.8",
+          "Steeltoe.Discovery.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Common.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Common.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Connector.Abstractions/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Abstractions": "3.2.8",
+          "Steeltoe.Extensions.Configuration.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/net6.0/Steeltoe.Connector.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Steeltoe.Connector.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Connector.ConnectorBase/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common": "3.2.8",
+          "Steeltoe.Connector.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Connector.ConnectorBase.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Connector.ConnectorBase.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Discovery.Abstractions/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Discovery.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Discovery.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Discovery.ClientBase/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Http": "3.2.8",
+          "Steeltoe.Connector.ConnectorBase": "3.2.8",
+          "Steeltoe.Discovery.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/net6.0/Steeltoe.Discovery.ClientBase.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Steeltoe.Discovery.ClientBase.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Discovery.ClientCore/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Discovery.ClientBase": "3.2.8"
+        },
+        "compile": {
+          "lib/net6.0/Steeltoe.Discovery.ClientCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Steeltoe.Discovery.ClientCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Steeltoe.Discovery.Eureka/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Http": "3.2.8",
+          "Steeltoe.Connector.Abstractions": "3.2.8",
+          "Steeltoe.Discovery.ClientBase": "3.2.8"
+        },
+        "compile": {
+          "lib/netstandard2.0/Steeltoe.Discovery.Eureka.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Steeltoe.Discovery.Eureka.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Steeltoe.Extensions.Configuration.Abstractions/3.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Steeltoe.Common.Abstractions": "3.2.8"
+        },
+        "compile": {
+          "lib/net6.0/Steeltoe.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Steeltoe.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/8.0.1": {
         "type": "package",
         "dependencies": {
@@ -309,6 +477,19 @@
         },
         "runtime": {
           "lib/net9.0/System.IdentityModel.Tokens.Jwt.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.MetadataLoadContext/4.6.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.Reflection.MetadataLoadContext.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/System.Reflection.MetadataLoadContext.dll": {
             "related": ".xml"
           }
         }
@@ -698,6 +879,154 @@
         "scalar.aspnetcore.nuspec"
       ]
     },
+    "Steeltoe.Common/3.2.8": {
+      "sha512": "DTuWB4WBAnS2x+lHSlcrmq9ehOr3rn++xQ4RSrcJ1DZmn7zl06BhwF6GdKhJ/m/SoTDkuXFsya8p5OFVaMlOEA==",
+      "type": "package",
+      "path": "steeltoe.common/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Common.dll",
+        "lib/netstandard2.0/Steeltoe.Common.xml",
+        "steeltoe.common.3.2.8.nupkg.sha512",
+        "steeltoe.common.nuspec"
+      ]
+    },
+    "Steeltoe.Common.Abstractions/3.2.8": {
+      "sha512": "vPe+NXb6IfDlXgn7nX72CElCJnDteapMznA/rveELJwWa74lSjObje04Q0wxhbT1s8KS3JBO63bF1R3wDjNwvQ==",
+      "type": "package",
+      "path": "steeltoe.common.abstractions/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Common.Abstractions.dll",
+        "lib/netstandard2.0/Steeltoe.Common.Abstractions.xml",
+        "steeltoe.common.abstractions.3.2.8.nupkg.sha512",
+        "steeltoe.common.abstractions.nuspec"
+      ]
+    },
+    "Steeltoe.Common.Http/3.2.8": {
+      "sha512": "HnKqqe3+HBYZTspdy+SQ6D0hZz6Pp3U/gP1C6KPJCXyVOeSd8gVyXLc3eX8muwJWQH4c7YjJ1on1kbCYCDT74w==",
+      "type": "package",
+      "path": "steeltoe.common.http/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Common.Http.dll",
+        "lib/netstandard2.0/Steeltoe.Common.Http.xml",
+        "steeltoe.common.http.3.2.8.nupkg.sha512",
+        "steeltoe.common.http.nuspec"
+      ]
+    },
+    "Steeltoe.Connector.Abstractions/3.2.8": {
+      "sha512": "hgnYleluXf+BpKYnCU3qlglxbPYKVYbaNCEgwiNzRoAoXNzLNHAjKV456L8IjIJasCekU2undN3gqg69xqFgZw==",
+      "type": "package",
+      "path": "steeltoe.connector.abstractions/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net6.0/Steeltoe.Connector.Abstractions.dll",
+        "lib/net6.0/Steeltoe.Connector.Abstractions.xml",
+        "lib/netstandard2.0/Steeltoe.Connector.Abstractions.dll",
+        "lib/netstandard2.0/Steeltoe.Connector.Abstractions.xml",
+        "steeltoe.connector.abstractions.3.2.8.nupkg.sha512",
+        "steeltoe.connector.abstractions.nuspec"
+      ]
+    },
+    "Steeltoe.Connector.ConnectorBase/3.2.8": {
+      "sha512": "UJWeNGWnpWxgrL//gGMjQvbBUSP2N4knhMIT0x++Yj6RwlRQIW4ftA6eGZjgUWk+gjs40bTIy3lCV1gBGVeMrw==",
+      "type": "package",
+      "path": "steeltoe.connector.connectorbase/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Connector.ConnectorBase.dll",
+        "lib/netstandard2.0/Steeltoe.Connector.ConnectorBase.xml",
+        "steeltoe.connector.connectorbase.3.2.8.nupkg.sha512",
+        "steeltoe.connector.connectorbase.nuspec"
+      ]
+    },
+    "Steeltoe.Discovery.Abstractions/3.2.8": {
+      "sha512": "b5udMYgABp2pFQXwtYLKwNQ0fq08+0LduPrJCjm1CH0wdi+4dY0sO4vhyj5T0Kw80weLUNftRhlN+XoPXMEKbg==",
+      "type": "package",
+      "path": "steeltoe.discovery.abstractions/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Discovery.Abstractions.dll",
+        "lib/netstandard2.0/Steeltoe.Discovery.Abstractions.xml",
+        "steeltoe.discovery.abstractions.3.2.8.nupkg.sha512",
+        "steeltoe.discovery.abstractions.nuspec"
+      ]
+    },
+    "Steeltoe.Discovery.ClientBase/3.2.8": {
+      "sha512": "atM8lhY48pX+7LS91on/r+pMiWjidbMkSTbnrw+CobVL2u2Ic4y099tBptJVwyPVrUCRjKvFB/ch3aQzazONPA==",
+      "type": "package",
+      "path": "steeltoe.discovery.clientbase/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net6.0/Steeltoe.Discovery.ClientBase.dll",
+        "lib/net6.0/Steeltoe.Discovery.ClientBase.xml",
+        "lib/netstandard2.0/Steeltoe.Discovery.ClientBase.dll",
+        "lib/netstandard2.0/Steeltoe.Discovery.ClientBase.xml",
+        "steeltoe.discovery.clientbase.3.2.8.nupkg.sha512",
+        "steeltoe.discovery.clientbase.nuspec"
+      ]
+    },
+    "Steeltoe.Discovery.ClientCore/3.2.8": {
+      "sha512": "dLqnwbOH9PpaL24em+ZBpfqI+u9q8aAZhfMi6c1j4XgmoquJRNJjluAMkjD4a7X+MHAOhY1MpOseexz2xV5wxw==",
+      "type": "package",
+      "path": "steeltoe.discovery.clientcore/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net6.0/Steeltoe.Discovery.ClientCore.dll",
+        "lib/net6.0/Steeltoe.Discovery.ClientCore.xml",
+        "lib/netcoreapp3.1/Steeltoe.Discovery.ClientCore.dll",
+        "lib/netcoreapp3.1/Steeltoe.Discovery.ClientCore.xml",
+        "steeltoe.discovery.clientcore.3.2.8.nupkg.sha512",
+        "steeltoe.discovery.clientcore.nuspec"
+      ]
+    },
+    "Steeltoe.Discovery.Eureka/3.2.8": {
+      "sha512": "AJWKJFDqcOHw1mUuq01x7bVy0Vtfqmpl47qJ4EZpfCdujEVrRYfSbtcjEH1732OS7WrylTf679Pyqe+8wJ+GuA==",
+      "type": "package",
+      "path": "steeltoe.discovery.eureka/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard2.0/Steeltoe.Discovery.Eureka.dll",
+        "lib/netstandard2.0/Steeltoe.Discovery.Eureka.xml",
+        "steeltoe.discovery.eureka.3.2.8.nupkg.sha512",
+        "steeltoe.discovery.eureka.nuspec"
+      ]
+    },
+    "Steeltoe.Extensions.Configuration.Abstractions/3.2.8": {
+      "sha512": "ZfnU0Oa2vRhYKZ6CckttY7IUFZ5sgHl6gLB+HMgos99l4yop9AQhqdR/6Vi5HNGTIFeyvbcsmPgNMrZvbKjKyw==",
+      "type": "package",
+      "path": "steeltoe.extensions.configuration.abstractions/3.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net6.0/Steeltoe.Extensions.Configuration.Abstractions.dll",
+        "lib/net6.0/Steeltoe.Extensions.Configuration.Abstractions.xml",
+        "lib/netstandard2.0/Steeltoe.Extensions.Configuration.Abstractions.dll",
+        "lib/netstandard2.0/Steeltoe.Extensions.Configuration.Abstractions.xml",
+        "steeltoe.extensions.configuration.abstractions.3.2.8.nupkg.sha512",
+        "steeltoe.extensions.configuration.abstractions.nuspec"
+      ]
+    },
     "System.IdentityModel.Tokens.Jwt/8.0.1": {
       "sha512": "GJw3bYkWpOgvN3tJo5X4lYUeIFA2HD293FPUhKmp7qxS+g5ywAb34Dnd3cDAFLkcMohy5XTpoaZ4uAHuw0uSPQ==",
       "type": "package",
@@ -720,6 +1049,27 @@
         "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
+    },
+    "System.Reflection.MetadataLoadContext/4.6.0": {
+      "sha512": "TezS9fEP9kzL5U6GYHZY6I/tqz6qiHKNgAzuT6JJXJXuP+wWvNLN03gPxBK2uLP0LrLg/QXEAF++lxBNBSYILA==",
+      "type": "package",
+      "path": "system.reflection.metadataloadcontext/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp3.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/netcoreapp3.0/System.Reflection.MetadataLoadContext.xml",
+        "lib/netstandard2.0/System.Reflection.MetadataLoadContext.dll",
+        "lib/netstandard2.0/System.Reflection.MetadataLoadContext.xml",
+        "ref/netstandard2.0/System.Reflection.MetadataLoadContext.dll",
+        "ref/netstandard2.0/System.Reflection.MetadataLoadContext.xml",
+        "system.reflection.metadataloadcontext.4.6.0.nupkg.sha512",
+        "system.reflection.metadataloadcontext.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -730,7 +1080,9 @@
       "Microsoft.EntityFrameworkCore >= 10.0.6",
       "Newtonsoft.Json >= 13.0.4",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.1",
-      "Scalar.AspNetCore >= 2.13.22"
+      "Scalar.AspNetCore >= 2.13.22",
+      "Steeltoe.Discovery.ClientCore >= 3.2.8",
+      "Steeltoe.Discovery.Eureka >= 3.2.8"
     ]
   },
   "packageFolders": {
@@ -811,6 +1163,14 @@
           "Scalar.AspNetCore": {
             "target": "Package",
             "version": "[2.13.22, )"
+          },
+          "Steeltoe.Discovery.ClientCore": {
+            "target": "Package",
+            "version": "[3.2.8, )"
+          },
+          "Steeltoe.Discovery.Eureka": {
+            "target": "Package",
+            "version": "[3.2.8, )"
           }
         },
         "imports": [

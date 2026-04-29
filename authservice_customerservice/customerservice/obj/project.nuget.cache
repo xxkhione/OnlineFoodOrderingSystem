@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "C2daUkVKJtI=",
+  "dgSpecHash": "ioX39V76N6U=",
   "success": true,
   "projectFilePath": "C:\\Courses\\Q11\\SEN300\\online-food-ordering-system\\authservice_customerservice\\customerservice\\CustomerService.csproj",
   "expectedPackageFiles": [
@@ -23,7 +23,18 @@
     "C:\\Users\\dsargent\\.nuget\\packages\\npgsql\\10.0.2\\npgsql.10.0.2.nupkg.sha512",
     "C:\\Users\\dsargent\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\10.0.1\\npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512",
     "C:\\Users\\dsargent\\.nuget\\packages\\scalar.aspnetcore\\2.13.22\\scalar.aspnetcore.2.13.22.nupkg.sha512",
-    "C:\\Users\\dsargent\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.common\\3.2.8\\steeltoe.common.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.common.abstractions\\3.2.8\\steeltoe.common.abstractions.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.common.http\\3.2.8\\steeltoe.common.http.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.connector.abstractions\\3.2.8\\steeltoe.connector.abstractions.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.connector.connectorbase\\3.2.8\\steeltoe.connector.connectorbase.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.discovery.abstractions\\3.2.8\\steeltoe.discovery.abstractions.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.discovery.clientbase\\3.2.8\\steeltoe.discovery.clientbase.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.discovery.clientcore\\3.2.8\\steeltoe.discovery.clientcore.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.discovery.eureka\\3.2.8\\steeltoe.discovery.eureka.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\steeltoe.extensions.configuration.abstractions\\3.2.8\\steeltoe.extensions.configuration.abstractions.3.2.8.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
+    "C:\\Users\\dsargent\\.nuget\\packages\\system.reflection.metadataloadcontext\\4.6.0\\system.reflection.metadataloadcontext.4.6.0.nupkg.sha512"
   ],
   "logs": []
 }
