@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-internal record LoginResponse(Guid UserGuid, string Username, string Email);
+internal record LoginResponse(Guid CustomerGuid, string Username, string Email);
 
 [ApiController]
 [Route("api/[controller]")]
@@ -42,8 +42,8 @@ public class AuthController(
             return Unauthorized();
         }
 
-        var userInfo = await response.Content.ReadFromJsonAsync<LoginResponse>();
-        if (userInfo == null)
+        var customerInfo = await response.Content.ReadFromJsonAsync<LoginResponse>();
+        if (customerInfo == null)
         {
             logger.LogError("CustomerService returned success but response body was empty for {Email}.", customerDto.Email);
             return StatusCode(500, "Unexpected response from CustomerService.");
@@ -51,9 +51,9 @@ public class AuthController(
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.Name, userInfo.Username),
-            new(ClaimTypes.Email, userInfo.Email),
-            new("UserGuid", userInfo.UserGuid.ToString())
+            new(ClaimTypes.Name, customerInfo.Username),
+            new(ClaimTypes.Email, customerInfo.Email),
+            new("CustomerGuid", customerInfo.CustomerGuid.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));

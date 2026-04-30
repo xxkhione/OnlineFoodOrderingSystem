@@ -96,18 +96,18 @@ public class OrdersController(
     {
         try
         {
-            var userGuidClaim = User.Claims.FirstOrDefault(c => c.Type == "UserGuid")?.Value;
-            if (string.IsNullOrEmpty(userGuidClaim))
+            var customerGuidClaim = User.Claims.FirstOrDefault(c => c.Type == "CustomerGuid")?.Value;
+            if (string.IsNullOrEmpty(customerGuidClaim))
             {
                 return Unauthorized();
             }
-            Guid userguid = Guid.Parse(userGuidClaim);
+            Guid customerguid = Guid.Parse(customerGuidClaim);
 
-            var username = User.Identity?.Name; // from ClaimTypes.Name
+            var username = User.Identity?.Name; 
             var useremail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
             var order = mapper.Map<Order>(orderDTO);
-            order.CustomerGuid = userguid;
+            order.CustomerGuid = customerguid;
             order.OrderGuid = Guid.NewGuid();
             order.CreatedDate = DateTime.UtcNow;
 

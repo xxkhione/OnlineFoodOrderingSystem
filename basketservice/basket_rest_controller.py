@@ -15,13 +15,14 @@ load_dotenv()
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 MENU_ITEM_SERVICE_URL = os.getenv("MENU_ITEM_SERVICE_URL", "http://catalog_service:5000/api/menu-items")
+CUSTOMER_SERVICE_URL = os.getenv("CUSTOMER_SERVICE_URL", "http://customer_service:8002/api/customers")
 
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0, decode_responses=True)
 
 
-def get_user_basket_key(user_id: str) -> str:
-    return f"basket:{user_id}"
+def get_customer_basket_key(customer_id: str) -> str:
+    return f"basket:{customer_id}"
 
 
 def fetch_menu_item_details(menu_item_guid: UUID):
@@ -61,27 +62,28 @@ def test_basket():
     return {"message": "Basket Service is up and running!"}
 
 
-@app.get("/api/basket/{user_id}", response_model=list[MenuItem])
-def get_basket(user_id: str):
-    key = get_user_basket_key(user_id)
+@app.get("/api/basket/{customer_id}", response_model=list[MenuItem])
+def get_basket(customer_id: str):
+    key = get_customer_basket_key(customer_id)
     items = redis_client.hvals(key)
     basket = []
 
-    print(f"Fetching basket for user {user_id}: found {len(items)} item(s).")
+    print(f"Fetching basket for customer {customer_id}: found {len(items)} item(s).")
 
     for item in items:
         try:
             data = json.loads(item)
-            basket.append(MenuItem(**data))
+            menu_item = MenuItem(**data)
+            basket.append(menu_item.model_copy(update={"customer_id": UUID(customer_id)}))
         except Exception as e:
             print(f"Error parsing Redis item: {e}")
 
     return basket
 
 
-@app.post("/api/basket/{user_id}", status_code=status.HTTP_201_CREATED)
-def add_to_basket(user_id: str, menu_item: MenuItem):
-    key = get_user_basket_key(user_id)
+@app.post("/api/basket/{customer_id}", status_code=status.HTTP_201_CREATED)
+def add_to_basket(customer_id: str, menu_item: MenuItem):
+    key = get_customer_basket_key(customer_id)
     if menu_item.price <= 0:
         raise HTTPException(
             status_code=400, detail="Menu item price must be greater than 0."
@@ -102,9 +104,9 @@ def add_to_basket(user_id: str, menu_item: MenuItem):
     return {"message": f"Menu item '{menu_item.name}' added to basket."}
 
 
-@app.put("/api/basket/{user_id}/{menu_item_guid}")
-def update_basket_item(user_id: str, menu_item_guid: UUID, menu_item: MenuItem):
-    key = get_user_basket_key(user_id)
+@app.put("/api/basket/{customer_id}/{menu_item_guid}")
+def update_basket_item(customer_id: str, menu_item_guid: UUID, menu_item: MenuItem):
+    key = get_customer_basket_key(customer_id)
 
     if not redis_client.hexists(key, str(menu_item_guid)):
         raise HTTPException(status_code=404, detail="Menu item not found in basket.")
@@ -116,9 +118,9 @@ def update_basket_item(user_id: str, menu_item_guid: UUID, menu_item: MenuItem):
     return {"message": f"Menu item '{menu_item.name}' updated in basket."}
 
 
-@app.delete("/api/basket/{user_id}/{menu_item_guid}")
-def remove_from_basket(user_id: str, menu_item_guid: UUID):
-    key = get_user_basket_key(user_id)
+@app.delete("/api/basket/{customer_id}/{menu_item_guid}")
+def remove_from_basket(customer_id: str, menu_item_guid: UUID):
+    key = get_customer_basket_key(customer_id)
 
     if redis_client.hdel(key, str(menu_item_guid)) == 0:
         raise HTTPException(status_code=404, detail="Menu item not found in basket.")
@@ -128,9 +130,9 @@ def remove_from_basket(user_id: str, menu_item_guid: UUID):
     return {"message": f"Menu item {menu_item_guid} removed from basket."}
 
 
-@app.delete("/api/basket/{user_id}")
-def clear_basket(user_id: str):
-    key = get_user_basket_key(user_id)
+@app.delete("/api/basket/{customer_id}")
+def clear_basket(customer_id: str):
+    key = get_customer_basket_key(customer_id)
     redis_client.delete(key)
     print(f"Cleared basket for {key}")
     return {"message": "Basket cleared."}

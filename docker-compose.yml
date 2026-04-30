@@ -28,6 +28,7 @@ services:
       REDIS_HOST: basket_redis
       REDIS_PORT: 6379
       MENU_ITEM_SERVICE_URL: http://SEN300CatalogService:5000/api/menu-items
+      CUSTOMER_SERVICE_URL: http://SEN300CustomerService:8080/api/customers
       EUREKA_SERVER: http://SEN300EurekaServer:8761/eureka/
       EUREKA_APP_NAME: basketservice
       EUREKA_INSTANCE_HOST: basket_service
@@ -94,6 +95,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: Host=order_postgres;Port=5432;Database=orders;Username=postgres_user;Password=postgres!
+      MessageServiceUrl: http://SEN300MessageService:8080/api/messages
       Spring__Application__Name: orderservice
       Eureka__Client__ServiceUrl: http://SEN300EurekaServer:8761/eureka/
       Eureka__Client__ShouldRegisterWithEureka: "true"
