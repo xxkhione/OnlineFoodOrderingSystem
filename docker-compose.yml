@@ -236,6 +236,31 @@ services:
     networks:
       - sen300_network
     restart: always
+  ocelot_gateway:
+    build: ./ocelotgateway
+    container_name: SEN300OcelotGateway
+    ports:
+      - "9000:8080"
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    depends_on:
+      eureka_server:
+        condition: service_healthy
+      catalog_service:
+        condition: service_started
+      basket_service:
+        condition: service_started
+      customer_service:
+        condition: service_started
+      auth_service:
+        condition: service_started
+      message_service:
+        condition: service_started
+      order_service:
+        condition: service_started
+    networks:
+      - sen300_network
+    restart: always
 
 volumes:
   mongo_data:

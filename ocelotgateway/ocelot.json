@@ -1,0 +1,130 @@
+{
+    "Routes": [
+        {
+            "ServiceName": "CATALOGSERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/catalogservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        },
+        {
+            "ServiceName": "BASKETSERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/basketservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        },
+        {
+            "ServiceName": "ORDERSERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/orderservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        },
+        {
+            "ServiceName": "AUTHSERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/authservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        },
+        {
+            "ServiceName": "MESSAGESERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/messageservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        },
+        {
+            "ServiceName": "CUSTOMERSERVICE",
+            "DownstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/customerservice/{everything}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 15
+            },
+            "LoadBalancerOptions": {
+                "Type": "LeastConnection",
+                "Key": null,
+                "Expiry": 0
+            }
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://SEN300OcelotGateway:8080",
+        "RequestIdKey": "OcRequestId",
+        "DownstreamScheme": "http",
+        "ReRoutesCaseSensitive": false,
+        "UseServiceDiscovery": true,
+        "ServiceDiscoveryProvider": {
+        "Host": "SEN300EurekaServer",
+        "Port": 8761,
+        "Type": "Eureka"
+        }
+    }
+}
