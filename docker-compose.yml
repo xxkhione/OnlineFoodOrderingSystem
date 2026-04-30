@@ -28,6 +28,7 @@ services:
       REDIS_HOST: basket_redis
       REDIS_PORT: 6379
       MENU_ITEM_SERVICE_URL: http://SEN300CatalogService:5000/api/menu-items
+      CUSTOMER_SERVICE_URL: http://SEN300CustomerService:8002/api/customers
       EUREKA_SERVER: http://SEN300EurekaServer:8761/eureka/
       EUREKA_APP_NAME: basketservice
       EUREKA_INSTANCE_HOST: basket_service
